@@ -1,0 +1,19 @@
+nextflow_pipeline {
+
+    name "Testing main.nf workflow"
+    script "main.nf"
+
+    test("Should run without failures") {
+
+        when {
+            params {
+                // define parameters here.
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(workflow).match()
+        }
+    }
+}

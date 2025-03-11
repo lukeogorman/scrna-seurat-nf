@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dummy//nextflow_schema.json",
+  "title": "dummy pipeline parameters",
+  "description": "Example",
+  "type": "object",
+  "$defs": {
+    "input_output_options": {
+      "title": "Input/output options",
+      "type": "object",
+      "fa_icon": "fas fa-terminal",
+      "description": "Define where the pipeline should find input data and save output data.",
+      "required": ["outdir"],
+      "properties": {
+        "outdir": {
+          "type": "string",
+          "format": "directory-path",
+          "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
+          "fa_icon": "fas fa-folder-open",
+          "default": "/mnt/home1/alemg/nextflow/nf-pipeline-setup/tests/result"
+        }
+      }
+    },
+    "generic_options": {
+      "title": "Generic options",
+      "type": "object",
+      "fa_icon": "fas fa-file-import",
+      "description": "Less common options for the pipeline, typically set in a config file.",
+      "help_text": "These options are common to all nf-core pipelines and allow you to customise some of the core preferences for how the pipeline runs.\n\nTypically these options would be set in a Nextflow config file loaded for all pipeline runs, such as `~/.nextflow/config`.",
+      "properties": {
+        "version": {
+          "type": "boolean",
+          "description": "Display version and exit.",
+          "fa_icon": "fas fa-question-circle",
+          "hidden": true
+        },
+        "validate_params": {
+          "type": "boolean",
+          "description": "Boolean whether to validate parameters against the schema at runtime",
+          "default": true,
+          "fa_icon": "fas fa-check-square",
+          "hidden": true
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/$defs/input_output_options"
+    },
+    {
+      "$ref": "#/$defs/generic_options"
+    }
+  ],
+  "properties": {
+    "singleEnd": {
+      "type": "boolean"
+    },
+    "reads": {
+      "type": "string",
+      "default": "/mnt/home1/alemg/nextflow/nf-pipeline-setup/tests/data/*_{1,R1,2,R2}.{fq,fq.gz,fastq,fastq.gz}"
+    },
+    "cpus": {
+      "type": "integer",
+      "default": 10
+    },
+    "monochrome_logs": {
+      "type": "boolean"
+    },
+    "email": {
+      "type": "string",
+      "default": "alem.gusinac@radboudumc.nl"
+    },
+    "email_on_fail": {
+      "type": "string"
+    },
+    "plaintext_email": {
+      "type": "boolean"
+    },
+    "hook_url": {
+      "type": "string"
+    }
+  }
+}
